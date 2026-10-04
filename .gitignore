@@ -1,0 +1,10 @@
+# Private keys must never be committed (public repo)
+*.key
+*.csr
+*.srl
+
+# OS / editor noise
+.DS_Store
+__pycache__/
+*.pyc
+.vscode/

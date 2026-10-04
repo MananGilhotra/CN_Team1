@@ -1,0 +1,6 @@
+# Extensions used when the Team 1 root CA signs the server certificate.
+# Browsers only trust the names listed in subjectAltName.
+basicConstraints=CA:FALSE
+keyUsage=digitalSignature,keyEncipherment
+extendedKeyUsage=serverAuth
+subjectAltName=DNS:app.team1.test,DNS:api.team1.test
