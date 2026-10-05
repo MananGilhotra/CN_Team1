@@ -104,7 +104,7 @@ sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
 | [`evidence/05_TLS`](evidence/05_TLS) | Task E - HTTPS with our own CA | 8 |
 | [`evidence/06_CACHE`](evidence/06_CACHE) | Task F - Cache-Control, ETag, 304 | 5 |
 | [`evidence/07_WIRESHARK`](evidence/07_WIRESHARK) | Task G - DNS, TCP, TLS, ports in packet captures | 7 |
-| [`evidence/08_FAILURES`](evidence/08_FAILURES) | Section 6.3 - five required failure demonstrations | live demo + screenshots |
+| [`evidence/08_FAILURES`](evidence/08_FAILURES) | Section 6.3 - five required failure demonstrations | live demo |
 
 Each evidence folder has a README that lists every file and what it proves.
 
