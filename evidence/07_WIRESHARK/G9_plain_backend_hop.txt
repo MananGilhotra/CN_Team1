@@ -1,0 +1,63 @@
+Mac 2 (10.7.21.240) - edge-to-backend hop captured with tcpdump
+Command: sudo tcpdump -i en0 -A -s0 'tcp port 3001 or tcp port 3002'
+Requests sent from Mac 4 (10.7.19.69) to https://app.team1.test/api/status
+
+Excerpt of the readable lines (hex/binary payload lines omitted).
+tcpdump shows port 3001 as "redwood-broker" and port 3002 as "exlm-agent".
+
+--- Request 1 -> Backend A (Mac 3, 10.7.22.147:3001) ---
+21:34:23.172893 IP 10.7.21.240.64913 > 10.7.22.147.redwood-broker: Flags [SEW], seq 2588278317, win 65535, length 0
+21:34:23.182886 IP 10.7.22.147.redwood-broker > 10.7.21.240.64913: Flags [S.E], seq 3960425162, ack 2588278318, win 65535, length 0
+21:34:23.183060 IP 10.7.21.240.64913 > 10.7.22.147.redwood-broker: Flags [.], ack 1, win 2059, length 0
+21:34:23.183105 IP 10.7.21.240.64913 > 10.7.22.147.redwood-broker: Flags [P.], seq 1:166, ack 1, win 2059, length 165
+GET /api/status HTTP/1.1
+Host: app.team1.test
+X-Real-IP: 10.7.19.69
+X-Forwarded-For: 10.7.19.69
+X-Forwarded-Proto: https
+user-agent: curl/8.7.1
+accept: */*
+
+21:34:23.190783 IP 10.7.22.147.redwood-broker > 10.7.21.240.64913: Flags [P.], seq 1:203, ack 166, win 2057, length 202
+HTTP/1.0 200 OK
+Server: TeamBackend/1.0 Python/3.14.6
+Date: Sun, 04 Oct 2026 16:04:23 GMT
+X-Backend: A
+Cache-Control: no-store
+Content-Type: application/json; charset=utf-8
+Content-Length: 115
+
+21:34:23.190784 IP 10.7.22.147.redwood-broker > 10.7.21.240.64913: Flags [FP.], seq 203:318, ack 166, win 2057, length 115
+{"backend": "A", "status": "ok", "host": "Manans-MacBook-Pro-2.local", "port": 3001, "time": "2026-10-04T21:34:23"}
+
+--- Request 2 -> Backend B (Mac 4, 10.7.19.69:3002) ---
+21:34:23.247949 IP 10.7.21.240.64914 > 10.7.19.69.exlm-agent: Flags [SEW], seq 3803347542, win 65535, length 0
+21:34:23.257241 IP 10.7.19.69.exlm-agent > 10.7.21.240.64914: Flags [S.E], seq 1063507182, ack 3803347543, win 65535, length 0
+21:34:23.257555 IP 10.7.21.240.64914 > 10.7.19.69.exlm-agent: Flags [.], ack 1, win 2059, length 0
+21:34:23.257697 IP 10.7.21.240.64914 > 10.7.19.69.exlm-agent: Flags [P.], seq 1:166, ack 1, win 2059, length 165
+GET /api/status HTTP/1.1
+Host: app.team1.test
+X-Real-IP: 10.7.19.69
+X-Forwarded-For: 10.7.19.69
+X-Forwarded-Proto: https
+user-agent: curl/8.7.1
+accept: */*
+
+21:34:23.292208 IP 10.7.19.69.exlm-agent > 10.7.21.240.64914: Flags [P.], seq 1:203, ack 166, win 2051, length 202
+HTTP/1.0 200 OK
+Server: TeamBackend/1.0 Python/3.12.5
+Date: Sun, 04 Oct 2026 16:04:23 GMT
+X-Backend: B
+Cache-Control: no-store
+Content-Type: application/json; charset=utf-8
+Content-Length: 115
+
+21:34:23.292211 IP 10.7.19.69.exlm-agent > 10.7.21.240.64914: Flags [FP.], seq 203:318, ack 166, win 2051, length 115
+{"backend": "B", "status": "ok", "host": "Akhils-MacBook-Pro-2.local", "port": 3002, "time": "2026-10-04T21:34:23"}
+
+The same capture continued with A, B, A, B for the remaining requests
+(nginx round-robin), each with its own TCP handshake to the backend.
+
+What this proves: between the client and Mac 2 the traffic is TLS-encrypted
+(see G6), but between Mac 2 and the backends it is plain HTTP. TLS terminates
+at the nginx edge, and X-Forwarded-For carries the real client IP.

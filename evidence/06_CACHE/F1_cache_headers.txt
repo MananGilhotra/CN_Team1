@@ -1,0 +1,15 @@
+Mac 3 (Manan's MacBook Pro, 10.7.22.147) - Task F: cache headers
+Terminal output, 4 Oct 2026
+
+manangilhotra010@Manans-MacBook-Pro-2 ~ % tcurl -I https://app.team1.test/api/info
+HTTP/2 200 
+server: nginx/1.31.6
+date: Sun, 04 Oct 2026 15:51:26 GMT
+content-type: application/json; charset=utf-8
+content-length: 167
+x-backend: A
+cache-control: public, max-age=60
+etag: "d45923083f0a9a28"
+x-edge: mac2-nginx
+
+(tcurl = curl --cacert ~/team1-rootCA.pem)

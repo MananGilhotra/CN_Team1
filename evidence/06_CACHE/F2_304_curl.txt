@@ -1,0 +1,32 @@
+Mac 3 (Manan's MacBook Pro, 10.7.22.147) - Task F: conditional requests
+Terminal output, 4 Oct 2026
+
+manangilhotra010@Manans-MacBook-Pro-2 ~ % ETAG=$(tcurl -sI https://app.team1.test/api/info | awk -F': ' 'tolower($1)=="etag"{print $2}' | tr -d '\r')
+echo "$ETAG"
+tcurl -si -H "If-None-Match: $ETAG" https://app.team1.test/api/info
+tcurl -si -H "If-None-Match: $ETAG" https://app.team1.test/api/info
+tcurl -si -H 'If-None-Match: "old"' https://app.team1.test/api/info | head -1
+"d45923083f0a9a28"
+HTTP/2 304 
+server: nginx/1.31.6
+date: Sun, 04 Oct 2026 15:52:41 GMT
+x-backend: A
+cache-control: public, max-age=60
+etag: "d45923083f0a9a28"
+x-edge: mac2-nginx
+
+HTTP/2 304 
+server: nginx/1.31.6
+date: Sun, 04 Oct 2026 15:52:41 GMT
+x-backend: B
+cache-control: public, max-age=60
+etag: "d45923083f0a9a28"
+x-edge: mac2-nginx
+
+HTTP/2 200 
+
+What this shows:
+- With a matching ETag, the server answers 304 Not Modified with no body
+  (conditional request), from both Backend A and Backend B, because both
+  backends return identical content with the same ETag.
+- With a non-matching ETag ("old"), the server sends a full 200 response.

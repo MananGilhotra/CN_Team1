@@ -2,9 +2,10 @@
 
 | File | What it proves |
 | --- | --- |
-| `D1_round_robin.png` | Six requests from Mac 4 alternate `x-backend: A, B, A, B...` |
-| `D1b_round_robin_from_mac1.png` | The same from Mac 1 |
-| `D2_http_versions.png` | HTTP/1.1 and HTTP/2 both served by the edge |
-| `D3_nginx_log.png` | nginx access log on Mac 2 alternating between `:3001` and `:3002` |
+| `D1_round_robin.png` | Six requests from Mac 4 to `https://app.team1.test` alternate A, B, A, B, A, B (header and JSON body show Mac 3 / Mac 4) |
+| `D2_http_versions.png` | The edge serves both `HTTP/1.1 200 OK` and `HTTP/2 200` |
+| `D4_nginx_config_test_and_local_lb.png` | `nginx -t` passes on Mac 2, and a local test alternates A, B, A, B |
+
+Round-robin from Mac 1 is also visible at the top of `../02_DNS/B2_dnsmasq_conf.png`.
 
 Configuration: [../../nginx/nginx.conf](../../nginx/nginx.conf)

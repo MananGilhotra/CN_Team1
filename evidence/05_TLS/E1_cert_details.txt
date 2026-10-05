@@ -1,0 +1,11 @@
+Mac 2 (Yashi's MacBook Pro, 10.7.21.240) - certificate verification
+Terminal output, 4 Oct 2026
+
+yashiagarwal@Yashis-MacBook-Pro-2 team1-certs % cd ~/team1-certs
+openssl verify -CAfile team1-rootCA.pem app.team1.test.crt
+openssl x509 -in app.team1.test.crt -noout -subject -issuer -ext subjectAltName
+app.team1.test.crt: OK
+subject=C=IN, O=Team1 CN Project, CN=app.team1.test
+issuer=C=IN, O=Team1 CN Project, CN=Team1 Local Root CA
+X509v3 Subject Alternative Name: 
+    DNS:app.team1.test, DNS:api.team1.test

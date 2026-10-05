@@ -14,8 +14,8 @@ All four Macs are on the same private Wi-Fi LAN.
 | --- | --- | --- | --- | --- | --- | --- |
 | Mac 1 | Private DNS server + test client | Harshita | 10.7.24.11 | 255.255.224.0 (/19) | 10.7.0.1 | 7a:ce:a3:b1:ac:0c |
 | Mac 2 | Edge reverse proxy + load balancer (TLS) | Yashi | 10.7.21.240 | 255.255.224.0 (/19) | 10.7.0.1 | 6e:52:40:c4:65:03 |
-| Mac 3 | Backend A | Manan | 10.7.22.147 | 255.255.224.0 (/19) | 10.7.0.1 | see `evidence/01_LAN/A1_mac3_ipinfo.png` |
-| Mac 4 | Backend B + main test client | Akhil | 10.7.19.69 | 255.255.224.0 (/19) | 10.7.0.1 | see `evidence/01_LAN/A1_mac4_ipinfo.png` |
+| Mac 3 | Backend A | Manan | 10.7.22.147 | 255.255.224.0 (/19) | 10.7.0.1 | 46:c0:ce:cd:b4:e4 |
+| Mac 4 | Backend B + main test client | Akhil | 10.7.19.69 | 255.255.224.0 (/19) | 10.7.0.1 | 9e:92:d0:0e:ab:aa |
 
 ## Services and ports
 
