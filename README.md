@@ -42,7 +42,7 @@ Client (Mac 4) --HTTPS, TCP 443-----> Mac 2 (nginx, TLS terminates here)
 | [`nginx/`](nginx) | `nginx.conf` - edge, TLS and load-balancer configuration for Mac 2 |
 | [`tls/`](tls) | `certificate-setup.md` (CA + certificate steps), `openssl-san.cnf` |
 | [`scripts/`](scripts) | `verify-lan.sh`, `verify-dns.sh`, `verify-backends.sh`, `verify-edge.sh` |
-| [`docs/`](docs) | `architecture.md`, `ip-service-inventory.md`, `topology.png`, `request-flow.png` |
+| [`docs/`](docs) | `architecture.md`, `architecture.pdf`, `ip-service-inventory.md`, `topology.png`, `request-flow.png` |
 | [`evidence/`](evidence) | Screenshots and packet captures for every task (see below) |
 
 ## Running it
@@ -104,7 +104,7 @@ sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
 | [`evidence/05_TLS`](evidence/05_TLS) | Task E - HTTPS with our own CA | 8 |
 | [`evidence/06_CACHE`](evidence/06_CACHE) | Task F - Cache-Control, ETag, 304 | 5 |
 | [`evidence/07_WIRESHARK`](evidence/07_WIRESHARK) | Task G - DNS, TCP, TLS, ports in packet captures | 7 |
-| [`evidence/08_FAILURES`](evidence/08_FAILURES) | Section 6.3 - five required failure demonstrations | live demo |
+| [`evidence/08_FAILURES`](evidence/08_FAILURES) | Section 6.3 - five required failure demonstrations | live demo + screenshots |
 
 Each evidence folder has a README that lists every file and what it proves.
 

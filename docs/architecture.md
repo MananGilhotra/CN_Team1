@@ -52,7 +52,7 @@ Mac 2, and nginx chooses the backend.
 - **`.test` domain** - reserved for testing (RFC 6761); `.local` conflicts with macOS mDNS.
 - **dnsmasq with `local=/team1.test/`** - our zone is never forwarded upstream; all other names are forwarded to 1.1.1.1 / 8.8.8.8, so the internet keeps working for clients.
 - **Own root CA instead of a self-signed server certificate** - clients trust one root, and the server certificate carries the correct SANs. Validation is never skipped (no `curl -k`). See [../tls/certificate-setup.md](../tls/certificate-setup.md).
-- **TLS terminates at the edge** - certificates live in one place; the edge-to-backend hop is plain HTTP inside the LAN (shown in `evidence/07_WIRESHARK/G9_plain_backend_hop.png`).
+- **TLS terminates at the edge** - certificates live in one place; the edge-to-backend hop is plain HTTP inside the LAN (shown in `evidence/07_WIRESHARK/G9_plain_backend_hop.txt`).
 - **Round-robin with passive health checks** - `proxy_next_upstream` retries a failed request on the other backend; `max_fails=1 fail_timeout=10s` keeps a dead backend out of rotation for 10 seconds.
 - **Backends bind 0.0.0.0** - binding to 127.0.0.1 would make them unreachable from Mac 2.
 - **Identical `/api/info` on both backends** - the ETag matches whichever backend answers, so conditional requests (304) work behind the load balancer.
